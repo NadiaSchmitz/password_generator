@@ -10,8 +10,8 @@
 //"Wenn es regnet, dann wird es nass ." besteht aus den Teilwörtern 
 //"Wenn" "es" "regnet," "dann" "wird" "es" "nass" "." und das dazugehörige Passwort ist "Ns,NdSs."
 //
-//Wenn das Password schon 8 soll 1 Sonderzeichen und 1 Zahl hinzugefügt werden (max 10). 
-//Falls das Passwort weniger als 8 Zeichen ergibt, werden zusätzlich notwendiger 
+//Wenn das Password schon 6 soll 1 Sonderzeichen und 1 Zahl hinzugefügt werden (max 8). 
+//Falls das Passwort weniger als 6 Zeichen ergibt, werden zusätzlich notwendiger 
 //Anzahl der Zeichen ergänsen (Aus Sonderzeichen und Zahlen).
 
 
@@ -21,12 +21,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		int i, character_i, number_i;
+		int i, character_i, number_i, symbol_plus;
 		String sentence, password = "";
 		String [] words;
 		
 		char [] character = {'!', '"', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\'', ']', '^', '_', '`', '{', '|', '}', '~'};
-		int [] number = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 		
 		sentence = IOTools.readLine("Geben Sie einen Satz ein: ");
 		
@@ -39,30 +38,23 @@ public class Main {
 			password = password + words_letter[i];
 		}
 		
-		System.out.println("Ihr Passwort: " + password);
-		
 		character_i = (int)Math.round(Math.random() * (character.length - 1));
 		number_i = (int)Math.round(Math.random() * 10);
 		
 		if (words_letter.length >= 6) {
-			System.out.println(">=6");
 			password = password.substring(0, 6);
 			number_i = (int)Math.round(Math.random() * 10);
 			password = password + character[character_i] + "" + number_i;
 		} else {
-			System.out.println("<6");
-			System.out.println(password.length());
 			number_i = (int)Math.round(Math.random() * 10);
-			password = password + character[character_i] + "" + number_i;
-			for (i = 0; i < 8 - (int)password.length(); i++) {
+			password = password + character[character_i];
+			symbol_plus = 8 - (int)password.length();
+			for (i = 0; i < symbol_plus; i++) {
 				number_i = (int)Math.round(Math.random() * 10);
-				password = password + number_i + "";
-				System.out.println(password.length());
+				password = password + "" + number_i;
 			}
 		}
 		
-		//System.out.println(character_i);
-		//System.out.println(number_i);
 		System.out.println("Ihr Passwort: " + password);
 	}
 
